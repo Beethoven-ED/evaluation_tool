@@ -18,6 +18,15 @@ then
   rm -rf ./$activity/$studentid
 fi
 
+git ls-remote git@github.com:$userid/$activity
+exists=$?
+
+if [ $exists -eq 128 ]
+then
+  echo "$studentid,0" >> ./$activity.csv
+  exit
+fi
+
 git clone https://github.com/$userid/$activity.git ./$activity/$studentid
 
 cd ./$activity/$studentid
